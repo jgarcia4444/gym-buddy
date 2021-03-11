@@ -11,6 +11,8 @@
 		1F7C85BE25F9C61A004AF094 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C85BD25F9C61A004AF094 /* ContentView.swift */; };
 		1F7C85C025F9C61A004AF094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F7C85BF25F9C61A004AF094 /* Assets.xcassets */; };
 		1F7C85C325F9C61A004AF094 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F7C85C225F9C61A004AF094 /* Preview Assets.xcassets */; };
+		1FDE007225FADE4B00D0CB6A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE007125FADE4B00D0CB6A /* HomeView.swift */; };
+		1FDE007625FADF6500D0CB6A /* GymBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE007425FADF6500D0CB6A /* GymBuddy.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		1F7C85BF25F9C61A004AF094 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F7C85C225F9C61A004AF094 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F7C85C425F9C61A004AF094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FDE007125FADE4B00D0CB6A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1FDE007525FADF6500D0CB6A /* GymBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GymBuddy.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				1F7C85BB25F9C61A004AF094 /* Gym_BuddyApp.swift */,
 				1F7C85BD25F9C61A004AF094 /* ContentView.swift */,
+				1FDE007125FADE4B00D0CB6A /* HomeView.swift */,
+				1FDE007425FADF6500D0CB6A /* GymBuddy.xcdatamodeld */,
 				1F7C85BF25F9C61A004AF094 /* Assets.xcassets */,
 				1F7C85C425F9C61A004AF094 /* Info.plist */,
 				1F7C85C125F9C61A004AF094 /* Preview Content */,
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FDE007225FADE4B00D0CB6A /* HomeView.swift in Sources */,
 				1F7C85BE25F9C61A004AF094 /* ContentView.swift in Sources */,
+				1FDE007625FADF6500D0CB6A /* GymBuddy.xcdatamodeld in Sources */,
 				1F7C85BC25F9C61A004AF094 /* Gym_BuddyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +336,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1FDE007425FADF6500D0CB6A /* GymBuddy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1FDE007525FADF6500D0CB6A /* GymBuddy.xcdatamodel */,
+			);
+			currentVersion = 1FDE007525FADF6500D0CB6A /* GymBuddy.xcdatamodel */;
+			path = GymBuddy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1F7C85B025F9C61A004AF094 /* Project object */;
 }
