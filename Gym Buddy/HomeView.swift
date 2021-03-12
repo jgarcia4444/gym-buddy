@@ -11,6 +11,10 @@ struct HomeView: View {
     @Environment(\.colorScheme) var mode
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: User.entity(), sortDescriptors: []) var users : FetchedResults<User>
+    @State private var profileBtnAnimationAmount : CGFloat = 1
+    var computedStrokeColor : Color {
+        return mode == .dark ? Color.white : Color.black
+    }
     var body: some View {
         NavigationView {
             VStack {
@@ -19,14 +23,26 @@ struct HomeView: View {
                     NavigationLink(destination: ProfileView()) {
                         Image(systemName: "person.circle.fill")
                             .imageScale(.large)
-                            .foregroundColor(mode == .dark ? .white : .black)                    }
+                            .foregroundColor(mode == .dark ? .white : .black)
+                            
+                            .overlay(
+                                Circle()
+                                    .stroke(self.userCreated() ? Color.clear : Color.white)
+                                    .scaleEffect(self.userCreated() ? 0 : profileBtnAnimationAmount)
+                                    .opacity(Double(2 - profileBtnAnimationAmount))
+                                    .animation(
+                                        Animation.easeOut(duration: 1)
+                                            .repeatForever(autoreverses: false)
+                                    )
+                            )
+                    }
                 }
                     .padding([.leading, .trailing], 20)
                 Spacer()
             }
-        }
-        .onAppear {
-            print(self.userCreated())
+            .onAppear {
+                profileBtnAnimationAmount += 0.5
+            }
         }
     }
     
