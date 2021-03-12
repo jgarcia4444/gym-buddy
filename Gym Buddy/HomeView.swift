@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(\.colorScheme) var mode
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(entity: User.entity(), sortDescriptors: []) var users : FetchedResults<User>
     var body: some View {
         NavigationView {
             VStack {
@@ -16,14 +19,22 @@ struct HomeView: View {
                     NavigationLink(destination: ProfileView()) {
                         Image(systemName: "person.circle.fill")
                             .imageScale(.large)
-                            .foregroundColor(.black)
-                    }
+                            .foregroundColor(mode == .dark ? .white : .black)                    }
                 }
                     .padding([.leading, .trailing], 20)
                 Spacer()
             }
         }
-        
+        .onAppear {
+            print(self.userCreated())
+        }
+    }
+    
+    func userCreated() -> Bool {
+        if users.count == 0 {
+            return false
+        }
+        return true
     }
 }
 
