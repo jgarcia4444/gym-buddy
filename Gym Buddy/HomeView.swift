@@ -9,10 +9,21 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        VStack {
-            Text("Home")
+        NavigationView {
+            VStack {
+                HStack{
+                    Spacer()
+                    NavigationLink(destination: ProfileView()) {
+                        Image(systemName: "person.circle.fill")
+                            .imageScale(.large)
+                            .foregroundColor(.black)
+                    }
+                }
+                    .padding([.leading, .trailing], 20)
+                Spacer()
+            }
         }
-        .transition(.slide)
+        
     }
 }
 
