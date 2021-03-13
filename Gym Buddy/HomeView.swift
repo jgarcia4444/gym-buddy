@@ -27,7 +27,7 @@ struct HomeView: View {
                             
                             .overlay(
                                 Circle()
-                                    .stroke(self.userCreated() ? Color.clear : Color.white)
+                                    .stroke(mode == .dark ? Color.white : Color.black)
                                     .scaleEffect(self.userCreated() ? 0 : profileBtnAnimationAmount)
                                     .opacity(Double(2 - profileBtnAnimationAmount))
                                     .animation(
