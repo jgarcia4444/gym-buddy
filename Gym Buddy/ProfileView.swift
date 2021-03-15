@@ -98,21 +98,21 @@ struct ProfileView: View {
                 Spacer()
             }
         }
+        .onAppear {
+            styleSegmentedPicker()
+        }
     }
     
-    init() {
+    func styleSegmentedPicker() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(metallicGold)
         
         var selectedForegroundColor: UIColor?
         var normalForegroundColor : UIColor?
         
         if colorMode == .dark {
-            print("Test")
             selectedForegroundColor = UIColor.black
             normalForegroundColor = UIColor.white
         } else {
-            print(colorMode
-            )
             selectedForegroundColor = UIColor.white
             normalForegroundColor = UIColor.black
         }
@@ -120,6 +120,27 @@ struct ProfileView: View {
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: selectedForegroundColor!], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: normalForegroundColor!], for: .normal)
     }
+    
+//    init() {
+//        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(metallicGold)
+//
+//        var selectedForegroundColor: UIColor?
+//        var normalForegroundColor : UIColor?
+//
+//        if colorMode == .dark {
+//            print("Test")
+//            selectedForegroundColor = UIColor.black
+//            normalForegroundColor = UIColor.white
+//        } else {
+//            print(colorMode
+//            )
+//            selectedForegroundColor = UIColor.white
+//            normalForegroundColor = UIColor.black
+//        }
+//
+//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: selectedForegroundColor!], for: .selected)
+//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: normalForegroundColor!], for: .normal)
+//    }
     
     func checkUserInfo () {
         self.validateName(name: fName)
