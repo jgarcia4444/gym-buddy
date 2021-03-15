@@ -12,13 +12,16 @@ struct ProfileView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.colorScheme) var colorMode
     @FetchRequest(entity: User.entity(), sortDescriptors: []) var users: FetchedResults<User>
-    @State private var fName: String = ""
-    @State private var lName: String = ""
-    @State private var email: String = ""
-    @State private var nameError: String = ""
-    @State private var height: String = ""
-    var heightMetricPickerOptions = ["In", "Cm"]
+    @State private var fName = ""
+    @State private var lName = ""
+    @State private var email = ""
+    @State private var nameError = ""
+    @State private var height = ""
+    let heightMetricPickerOptions = ["In", "Cm"]
     @State private var heightMetric = ""
+    @State private var weight = ""
+    let weightMetricPickerOptions = ["lbs", "kgs"]
+    @State private var weightMetric = ""
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -27,80 +30,112 @@ struct ProfileView: View {
                         .font(.subheadline)
                         .foregroundColor(Color.red)
                 }
-                Text("Name")
-                    .padding(.leading, 15)
-                    .font(.headline)
-                HStack {
-                    Spacer()
-                    TextField("First", text: $fName)
-                        .foregroundColor(metallicGold)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(metallicGold)
-                        )
-                    TextField("Last", text: $lName)
-                        .foregroundColor(metallicGold)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(metallicGold)
-                        )
-                    Spacer()
-                }
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                Divider()
-                VStack(alignment: .leading) {
-                    Text("Email")
+                Group {
+                    Text("Name")
                         .padding(.leading, 15)
                         .font(.headline)
                     HStack {
-                    TextField("", text: $email)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .foregroundColor(metallicGold)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(metallicGold)
-                        )
-                    }
-                    .padding([.leading, .trailing], 10)
-                }
-                Divider()
-                VStack(alignment: .leading) {
-                    Text("Height")
-                        .font(.headline)
-                        .padding(.leading, 15)
-                    HStack {
-                        TextField("", text: $height)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.numberPad)
+                        Spacer()
+                        TextField("First", text: $fName)
                             .foregroundColor(metallicGold)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(metallicGold)
                             )
-                        Picker("Height Metric", selection: $heightMetric) {
-                            ForEach(0..<heightMetricPickerOptions.count) {
-                                Text(heightMetricPickerOptions[$0]).tag(heightMetricPickerOptions[$0])
-                            }
+                        TextField("Last", text: $lName)
+                            .foregroundColor(metallicGold)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(metallicGold)
+                            )
+                        Spacer()
+                    }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                Group {
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Email")
+                            .padding(.leading, 15)
+                            .font(.headline)
+                        HStack {
+                        TextField("", text: $email)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .foregroundColor(metallicGold)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(metallicGold)
+                            )
                         }
-                        .pickerStyle(SegmentedPickerStyle())
+                        .padding([.leading, .trailing], 10)
                     }
-                    .padding([.leading, .trailing], 10)
                 }
-                Divider()
-                VStack {
-                    Button(action: {
-                        self.checkUserInfo()
-                    }) {
-                        Text("Save")
+                Group {
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Height")
+                            .font(.headline)
+                            .padding(.leading, 15)
+                        HStack {
+                            TextField("", text: $height)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                                .foregroundColor(metallicGold)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(metallicGold)
+                                )
+                            Picker("Height Metric", selection: $heightMetric) {
+                                ForEach(0..<heightMetricPickerOptions.count) {
+                                    Text(heightMetricPickerOptions[$0]).tag(heightMetricPickerOptions[$0])
+                                }
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
+                        .padding([.leading, .trailing], 10)
                     }
-                    
                 }
-                Spacer()
+                Group {
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Weight")
+                            .font(.headline)
+                            .padding(.leading, 15)
+                        HStack {
+                            TextField("", text: $weight)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                                .foregroundColor(metallicGold)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(metallicGold)
+                                )
+                            Picker("Weight Metric", selection: $weightMetric) {
+                                ForEach(0..<weightMetricPickerOptions.count) {
+                                    Text(weightMetricPickerOptions[$0]).tag(weightMetricPickerOptions[$0])
+                                }
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
+                        .padding([.leading, .trailing], 10)
+                    }
+                }
+                    Divider()
+                    VStack {
+                        Button(action: {
+                            self.checkUserInfo()
+                        }) {
+                            Text("Save")
+                        }
+                        
+                    }
+                    Spacer()
+            }
+            .onAppear {
+                styleSegmentedPicker()
             }
         }
-        .onAppear {
-            styleSegmentedPicker()
-        }
+        
     }
     
     func styleSegmentedPicker() {
