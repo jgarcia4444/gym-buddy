@@ -40,6 +40,7 @@ struct HomeView: View {
                     .padding([.leading, .trailing], 20)
                 Spacer()
             }
+            .navigationTitle(Text(""))
             .onAppear {
                 profileBtnAnimationAmount += 0.5
             }
