@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4758C126016DDF00C85938 /* ProfileForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4758C026016DDF00C85938 /* ProfileForm.swift */; };
+		1F4758C426016F6100C85938 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4758C326016F6100C85938 /* Profile.swift */; };
 		1F61A9D2260134B6005B65B1 /* ProfileFormError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61A9D1260134B6005B65B1 /* ProfileFormError.swift */; };
 		1F7C85BC25F9C61A004AF094 /* Gym_BuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C85BB25F9C61A004AF094 /* Gym_BuddyApp.swift */; };
 		1F7C85BE25F9C61A004AF094 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C85BD25F9C61A004AF094 /* ContentView.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F4758C026016DDF00C85938 /* ProfileForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileForm.swift; sourceTree = "<group>"; };
+		1F4758C326016F6100C85938 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		1F61A9D1260134B6005B65B1 /* ProfileFormError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFormError.swift; sourceTree = "<group>"; };
 		1F7C85B825F9C61A004AF094 /* Gym Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gym Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F7C85BB25F9C61A004AF094 /* Gym_BuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gym_BuddyApp.swift; sourceTree = "<group>"; };
@@ -64,9 +68,11 @@
 				1F7C85BD25F9C61A004AF094 /* ContentView.swift */,
 				1FDE007125FADE4B00D0CB6A /* HomeView.swift */,
 				1FDE007825FAE51200D0CB6A /* ProfileView.swift */,
+				1F4758C326016F6100C85938 /* Profile.swift */,
 				1F61A9D1260134B6005B65B1 /* ProfileFormError.swift */,
 				1FDE007425FADF6500D0CB6A /* GymBuddy.xcdatamodeld */,
 				1F7C85BF25F9C61A004AF094 /* Assets.xcassets */,
+				1F4758C026016DDF00C85938 /* ProfileForm.swift */,
 				1F7C85C425F9C61A004AF094 /* Info.plist */,
 				1F7C85C125F9C61A004AF094 /* Preview Content */,
 			);
@@ -151,8 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F61A9D2260134B6005B65B1 /* ProfileFormError.swift in Sources */,
+				1F4758C426016F6100C85938 /* Profile.swift in Sources */,
 				1FDE007225FADE4B00D0CB6A /* HomeView.swift in Sources */,
 				1F7C85BE25F9C61A004AF094 /* ContentView.swift in Sources */,
+				1F4758C126016DDF00C85938 /* ProfileForm.swift in Sources */,
 				1FDE007925FAE51200D0CB6A /* ProfileView.swift in Sources */,
 				1FDE007625FADF6500D0CB6A /* GymBuddy.xcdatamodeld in Sources */,
 				1F7C85BC25F9C61A004AF094 /* Gym_BuddyApp.swift in Sources */,
