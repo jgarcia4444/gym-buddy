@@ -258,7 +258,46 @@ func checkUserInfo() {
     self.validateAge()
     self.validateGender()
     self.validateWeightGoal()
+    let formErrors = [fNameError, lNameError, emailError, heightError, weightError, ageError, genderError, weightGoalError]
+    var shouldSaveUser = true
+    for error in formErrors {
+        if error != "" {
+            shouldSaveUser = false
+        }
+    }
+    if shouldSaveUser == true {
+        self.saveUser()
+    }
 }
+    
+    func saveUser() {
+        let newUser = User(context: moc)
+        newUser.fName = fName
+        newUser.lName = lName
+        newUser.email = email
+        guard let intHeight = Int16(height) else {
+            print("Could not convert height into an integer")
+            return
+        }
+        newUser.height = intHeight
+        guard let intWeight = Int16(weight) else {
+            print("Could not convert weight into an integer")
+            return
+        }
+        newUser.weight = intWeight
+        guard let intAge = Int16(age) else {
+            print("Could not convert age into an integer")
+            return
+        }
+        newUser.age = intAge
+        guard let intWeightGoal = Int16(weightGoal) else {
+            print("Could not convert weightGoal into an integer")
+            return
+        }
+        newUser.weightGoal = intWeightGoal
+        newUser.gender = gender
+        
+    }
 
 func validateWeightGoal() {
     if weightGoal.count < 1 {
