@@ -29,6 +29,7 @@ struct ProfileView: View {
     @State private var gender = ""
     @State private var weightGoal = ""
     @State private var heightError = ""
+    @State private var weightError: String = ""
     var body: some View {
         ScrollView {
             VStack {
@@ -113,6 +114,9 @@ struct ProfileView: View {
                     }
                     Group {
                         Divider()
+                        if weightError != "" {
+                            ProfileFormError(text: weightError)
+                        }
                         VStack(alignment: .leading) {
                             Text("Weight")
                                 .font(.headline)
@@ -242,6 +246,23 @@ struct ProfileView: View {
         self.validateName(name: lName, input: "Last")
         self.validateEmail()
         self.validateHeight()
+        self.validateWeight()
+    }
+    
+    func validateWeight() {
+        if weight.count < 1 {
+            weightError = "Weight cannot be left empty"
+        } else {
+            if Int(weight) == nil {
+                weightError = "Weight can only consist of numbers"
+            } else {
+                if weightMetric == "" {
+                    weightError = "Please select pounds or kilograms"
+                } else {
+                    weightError = ""
+                }
+            }
+        }
     }
     
     func validateHeight() {
@@ -251,7 +272,12 @@ struct ProfileView: View {
             if Int(height) == nil {
                 heightError = "Height can only consist of numbers."
             } else {
-                heightError = ""
+                if heightMetric == "" {
+                    heightError = "Please select inches or centimeters"
+                } else {
+                    heightError = ""
+                }
+                
             }
         }
     }
