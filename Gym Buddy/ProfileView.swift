@@ -16,7 +16,8 @@ struct ProfileView: View {
     @State private var lName = ""
     @State private var email = ""
     @State private var emailError = ""
-    @State private var nameError = ""
+    @State private var fNameError = ""
+    @State private var lNameError = ""
     @State private var height = ""
     let heightMetricPickerOptions = ["in", "cm"]
     @State private var heightMetric = ""
@@ -27,16 +28,17 @@ struct ProfileView: View {
     let genderOptions = ["Male", "Female"]
     @State private var gender = ""
     @State private var weightGoal = ""
+    @State private var heightError = ""
     var body: some View {
         ScrollView {
             VStack {
                 VStack(alignment: .leading) {
                     Group {
-                        if nameError != "" {
-                            Text(nameError)
-                                .font(.subheadline)
-                                .foregroundColor(Color.red)
-                                .padding(.leading, 15)
+                        if fNameError != "" {
+                            ProfileFormError(text: fNameError)
+                        }
+                        if lNameError != "" {
+                            ProfileFormError(text: lNameError)
                         }
                         Text("Name")
                             .padding(.leading, 15)
@@ -62,10 +64,7 @@ struct ProfileView: View {
                     Group {
                         Divider()
                         if emailError != "" {
-                            Text(emailError)
-                                .font(.subheadline)
-                                .foregroundColor(Color.red)
-                                .padding(.leading, 15)
+                            ProfileFormError(text: emailError)
                         }
                         VStack(alignment: .leading) {
                             Text("Email")
@@ -73,6 +72,7 @@ struct ProfileView: View {
                                 .font(.headline)
                             HStack {
                             TextField("", text: $email)
+                                .keyboardType(.emailAddress)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .foregroundColor(metallicGold)
                                 .overlay(
@@ -85,6 +85,9 @@ struct ProfileView: View {
                     }
                     Group {
                         Divider()
+                        if heightError != "" {
+                            ProfileFormError(text: heightError)
+                        }
                         VStack(alignment: .leading) {
                             Text("Height")
                                 .font(.headline)
@@ -234,10 +237,23 @@ struct ProfileView: View {
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: normalForegroundColor!], for: .normal)
     }
     
-    func checkUserInfo () {
-        self.validateName(name: fName)
-        self.validateName(name: lName)
+    func checkUserInfo() {
+        self.validateName(name: fName, input: "First")
+        self.validateName(name: lName, input: "Last")
         self.validateEmail()
+        self.validateHeight()
+    }
+    
+    func validateHeight() {
+        if height.count < 1 {
+            heightError = "Height cannot be left blank"
+        } else {
+            if Int(height) == nil {
+                heightError = "Height can only consist of numbers."
+            } else {
+                heightError = ""
+            }
+        }
     }
     
     func validateEmail() {
@@ -260,21 +276,34 @@ struct ProfileView: View {
         }
     }
     
-    func validateName(name: String) {
+    func validateName(name: String, input: String) {
         var isValid = true
         if name.count == 0 {
             isValid = false
-            nameError = "Name field cannot be left blank"
+            if input == "First" {
+                fNameError = "First name field cannot be left blank"
+            } else {
+                lNameError = "Last name field cannot be left blank"
+            }
         }
         for char in name {
             let stringChar = String(char)
             if let _ = Int(stringChar) {
                 isValid = false
-                nameError = "Name field cannot contain numbers"
+                if input == "First" {
+                    fNameError = "First name field cannot contain numbers"
+                } else {
+                    lNameError = "Last name field cannot contain numbers"
+                }
             }
         }
         if isValid == true {
-            nameError = ""
+            if input == "First" {
+                fNameError = ""
+            } else {
+                lNameError = ""
+            }
+            
         }
     }
     
