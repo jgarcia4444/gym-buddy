@@ -15,6 +15,7 @@ struct ProfileView: View {
     @State private var fName = ""
     @State private var lName = ""
     @State private var email = ""
+    @State private var emailError = ""
     @State private var nameError = ""
     @State private var height = ""
     let heightMetricPickerOptions = ["in", "cm"]
@@ -30,12 +31,13 @@ struct ProfileView: View {
         ScrollView {
             VStack {
                 VStack(alignment: .leading) {
-                    if nameError != "" {
-                        Text(nameError)
-                            .font(.subheadline)
-                            .foregroundColor(Color.red)
-                    }
                     Group {
+                        if nameError != "" {
+                            Text(nameError)
+                                .font(.subheadline)
+                                .foregroundColor(Color.red)
+                                .padding(.leading, 15)
+                        }
                         Text("Name")
                             .padding(.leading, 15)
                             .font(.headline)
@@ -59,6 +61,12 @@ struct ProfileView: View {
                     }
                     Group {
                         Divider()
+                        if emailError != "" {
+                            Text(emailError)
+                                .font(.subheadline)
+                                .foregroundColor(Color.red)
+                                .padding(.leading, 15)
+                        }
                         VStack(alignment: .leading) {
                             Text("Email")
                                 .padding(.leading, 15)
@@ -229,21 +237,45 @@ struct ProfileView: View {
     func checkUserInfo () {
         self.validateName(name: fName)
         self.validateName(name: lName)
+        self.validateEmail()
+    }
+    
+    func validateEmail() {
+        if email.count == 0 {
+            emailError = "Email cannot be left blank"
+        } else {
+            let atSeperatedEmail = email.components(separatedBy: "@")
+            if atSeperatedEmail.count == 2 {
+                let secondHalf = atSeperatedEmail[1]
+                let periodComponents = secondHalf.components(separatedBy: ".")
+                if periodComponents.count == 2 {
+                    emailError = ""
+                    return
+                } else {
+                    emailError = "An email must contain a '.'"
+                }
+            } else {
+                emailError = "An email must containe an '@'"
+            }
+        }
     }
     
     func validateName(name: String) {
+        var isValid = true
         if name.count == 0 {
+            isValid = false
             nameError = "Name field cannot be left blank"
-            return
         }
-        for char in fName {
+        for char in name {
             let stringChar = String(char)
             if let _ = Int(stringChar) {
+                isValid = false
                 nameError = "Name field cannot contain numbers"
-                return
             }
         }
-        nameError = ""
+        if isValid == true {
+            nameError = ""
+        }
     }
     
 }
