@@ -29,7 +29,10 @@ struct ProfileView: View {
     @State private var gender = ""
     @State private var weightGoal = ""
     @State private var heightError = ""
-    @State private var weightError: String = ""
+    @State private var weightError = ""
+    @State private var ageError = ""
+    @State private var genderError = ""
+    @State private var weightGoalError = ""
     var body: some View {
         ScrollView {
             VStack {
@@ -142,6 +145,9 @@ struct ProfileView: View {
                     }
                     Group {
                         Divider()
+                        if ageError != "" {
+                            ProfileFormError(text: ageError)
+                        }
                         VStack(alignment: .leading) {
                             Text("Age")
                                 .font(.headline)
@@ -161,6 +167,9 @@ struct ProfileView: View {
                     }
                     Group {
                         Divider()
+                        if genderError != "" {
+                            ProfileFormError(text: genderError)
+                        }
                         VStack(alignment: .leading) {
                             Text("Gender")
                                 .font(.headline)
@@ -178,6 +187,9 @@ struct ProfileView: View {
                     }
                     Group {
                         Divider()
+                        if weightGoalError != "" {
+                            ProfileFormError(text: weightGoalError)
+                        }
                         VStack(alignment: .leading) {
                             Text("Weight Goal")
                                 .font(.headline)
@@ -247,6 +259,41 @@ struct ProfileView: View {
         self.validateEmail()
         self.validateHeight()
         self.validateWeight()
+        self.validateAge()
+        self.validateGender()
+        self.validateWeightGoal()
+    }
+    
+    func validateWeightGoal() {
+        if weightGoal.count < 1 {
+            weightGoalError = "Weight goal cannot be left empty"
+        } else {
+            if Int(weightGoal) == nil {
+                weightGoalError = "Weight goal can only consist of numbers"
+            } else {
+                weightGoalError = ""
+            }
+        }
+    }
+    
+    func validateGender() {
+        if gender == "" {
+            genderError = "Please select a gender"
+        } else {
+            genderError = ""
+        }
+    }
+    
+    func validateAge() {
+        if age.count < 1 {
+            ageError = "Age cannot be left empty"
+        } else {
+            if Int(age) == nil {
+                ageError = "Age can only consist of numbers"
+            } else {
+                ageError = ""
+            }
+        }
     }
     
     func validateWeight() {
