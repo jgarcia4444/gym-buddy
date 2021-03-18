@@ -10,8 +10,10 @@ import SwiftUI
 struct Profile: View {
     @FetchRequest(entity: User.entity(), sortDescriptors: []) var users: FetchedResults<User>
     var fullName: String {
-        return "\(users[0].fName ?? "Test") \(users[0].lName ?? "User")"
+        return "\(user.fName ?? "Test") \(user.lName ?? "User")"
     }
+    var user : User {_users.wrappedValue[0]}
+    @State private var editing = false
     var body: some View {
         VStack(alignment: .leading) {
             Group {
@@ -29,29 +31,34 @@ struct Profile: View {
             Group {
                 Text("Height")
                     .font(.headline)
-                Text(users[0].height ?? "70")
+                Text(user.height ?? "70")
                 Divider()
             }
             Group {
                 Text("Weight")
                     .font(.headline)
-                Text(users[0].weight ?? "200")
+                Text(user.weight ?? "200")
                 Divider()
             }
             Group {
                 Text("Age")
                     .font(.headline)
-                Text(users[0].age ?? "100")
+                Text(user.age ?? "100")
             }
             Group {
                 Text("Gender")
                     .font(.headline)
-                Text(users[0].gender ?? "Male")
+                Text(user.gender ?? "Male")
             }
             Group {
                 Text("Weight Goal")
                     .font(.headline)
-                Text(users[0].weightGoal ?? "180")
+                Text(user.weightGoal ?? "180")
+            }
+            Group {
+                Button(action: {
+                    Self.editing.toggle()
+                })
             }
             
         }

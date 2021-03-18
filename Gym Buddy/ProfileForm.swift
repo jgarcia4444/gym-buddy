@@ -296,7 +296,11 @@ func checkUserInfo() {
         }
         newUser.weightGoal = intWeightGoal
         newUser.gender = gender
-        
+        do {
+            try moc.save()
+        } catch {
+            print("Unable to save the user")
+        }
     }
 
 func validateWeightGoal() {
